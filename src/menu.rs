@@ -1,16 +1,20 @@
-use crate::loading::TextureAssets;
-use crate::GameState;
+use crate::common::ChangeState;
+use crate::splash::TextureAssets;
+use crate::{AppState, Navigation, NavigationState};
 use bevy::prelude::*;
 
 pub struct MenuPlugin;
 
 /// This plugin is responsible for the game menu (containing only one button...)
-/// The menu is only drawn during the State `GameState::Menu` and is removed when that state is exited
+/// The menu is only drawn during the State `AppState::Menu` and is removed when that state is exited
 impl Plugin for MenuPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(OnEnter(GameState::Menu), setup_menu)
-            .add_systems(Update, click_play_button.run_if(in_state(GameState::Menu)))
-            .add_systems(OnExit(GameState::Menu), cleanup_menu);
+        app.add_systems(OnEnter(AppState::MainMenu), setup_menu)
+            .add_systems(
+                Update,
+                click_play_button.run_if(in_state(AppState::MainMenu)),
+            )
+            .add_systems(OnExit(AppState::MainMenu), cleanup_menu);
     }
 }
 
@@ -66,7 +70,7 @@ fn setup_menu(mut commands: Commands, textures: Res<TextureAssets>) {
                         ..Default::default()
                     },
                     button_colors,
-                    ChangeState(GameState::Playing),
+                    ChangeState(NavigationState::InGame),
                 ))
                 .with_children(|parent| {
                     parent.spawn(TextBundle::from_section(
@@ -176,13 +180,10 @@ fn setup_menu(mut commands: Commands, textures: Res<TextureAssets>) {
 }
 
 #[derive(Component)]
-struct ChangeState(GameState);
-
-#[derive(Component)]
 struct OpenLink(&'static str);
 
 fn click_play_button(
-    mut next_state: ResMut<NextState<GameState>>,
+    mut navigation: Navigation,
     mut interaction_query: Query<
         (
             &Interaction,
@@ -198,7 +199,7 @@ fn click_play_button(
         match *interaction {
             Interaction::Pressed => {
                 if let Some(state) = change_state {
-                    next_state.set(state.0.clone());
+                    navigation.next(state.0);
                 } else if let Some(link) = open_link {
                     if let Err(error) = webbrowser::open(link.0) {
                         warn!("Failed to open link {error:?}");
