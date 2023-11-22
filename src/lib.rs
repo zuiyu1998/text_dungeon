@@ -3,6 +3,7 @@
 mod audio;
 mod common;
 mod menu;
+mod props;
 mod splash;
 mod states;
 
