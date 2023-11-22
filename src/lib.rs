@@ -2,12 +2,14 @@
 
 mod audio;
 mod common;
+mod in_game;
 mod menu;
 mod props;
 mod splash;
 mod states;
 
 use crate::audio::InternalAudioPlugin;
+use crate::in_game::InGamePlugin;
 use crate::menu::MenuPlugin;
 use crate::splash::LoadingPlugin;
 use states::*;
@@ -23,7 +25,7 @@ impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
         app.add_state::<AppState>()
             .add_state::<GameState>()
-            .add_plugins((LoadingPlugin, MenuPlugin, InternalAudioPlugin));
+            .add_plugins((LoadingPlugin, MenuPlugin, InternalAudioPlugin, InGamePlugin));
 
         #[cfg(debug_assertions)]
         {

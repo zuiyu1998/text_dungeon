@@ -9,6 +9,7 @@ pub enum PropKey {
 
 pub struct PropValue {}
 
+#[derive(Default)]
 pub struct PropValues(HashMap<PropKey, PropValue>);
 
 impl PropValues {
@@ -18,7 +19,7 @@ impl PropValues {
 }
 
 ///属性
-#[derive(Component)]
+#[derive(Component, Default)]
 pub struct Props {
     buffs: HashMap<i32, BoxedBuf>,
     values: PropValues,

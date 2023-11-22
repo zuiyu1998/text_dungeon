@@ -8,7 +8,7 @@ pub enum NavigationState {
 impl NavigationState {
     pub fn get_states(&self) -> (AppState, GameState) {
         match self {
-            NavigationState::InGame => (AppState::InGame, GameState::Player),
+            NavigationState::InGame => (AppState::InGame, GameState::Playing),
         }
     }
 }
@@ -41,6 +41,6 @@ pub enum AppState {
 pub enum GameState {
     #[default]
     None,
-    Player,
+    Playing,
     InGameMenu,
 }
