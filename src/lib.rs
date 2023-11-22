@@ -15,8 +15,10 @@ use crate::splash::LoadingPlugin;
 use states::*;
 
 use bevy::app::App;
-#[cfg(debug_assertions)]
-use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
+
+#[cfg(feature = "dev")]
+mod dev;
+
 use bevy::prelude::*;
 
 pub struct GamePlugin;
@@ -27,9 +29,10 @@ impl Plugin for GamePlugin {
             .add_state::<GameState>()
             .add_plugins((LoadingPlugin, MenuPlugin, InternalAudioPlugin, InGamePlugin));
 
-        #[cfg(debug_assertions)]
+        #[cfg(feature = "dev")]
         {
-            app.add_plugins((FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin::default()));
+            use crate::dev::DevPlugin;
+            app.add_plugins((DevPlugin,));
         }
     }
 }
