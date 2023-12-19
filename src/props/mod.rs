@@ -60,3 +60,6 @@ pub trait Buff: Sync + Send + 'static {
 }
 
 pub type BoxedBuf = Box<dyn Buff>;
+
+#[derive(Component, Deref, DerefMut)]
+pub struct PropsComponent(Props);

@@ -1,7 +1,9 @@
 #![allow(clippy::type_complexity)]
 
 mod audio;
+mod battle;
 mod common;
+mod dice;
 mod in_game;
 mod menu;
 mod props;
