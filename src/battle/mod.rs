@@ -24,14 +24,14 @@ impl Battle {
         }
     }
 
-    fn is_hit(&mut self, result: &mut BattleResult) {
+    fn computed_hit(&mut self, result: &mut BattleResult) {
         let mut is_hit = false;
-        let is_dodage = self.is_dodge();
+        let is_dodage = self.computed_dodge();
 
         if is_dodage {
             is_hit = true;
         } else {
-            let is_defense = self.is_defense();
+            let is_defense = self.computed_defense();
 
             if is_defense {
                 is_hit = true
@@ -46,16 +46,16 @@ impl Battle {
 
         result.attack = self.active_info.attack;
 
-        self.is_hit(&mut result);
+        self.computed_hit(&mut result);
 
-        self.damage(&mut result);
+        self.computed_damage(&mut result);
 
         self.logger.flush();
 
         result
     }
 
-    fn is_defense(&mut self) -> bool {
+    fn computed_defense(&mut self) -> bool {
         let dice_result = self.active_info.defense_dice.get_numer();
 
         let mut is_dodge = false;
@@ -69,7 +69,7 @@ impl Battle {
         is_dodge
     }
 
-    fn is_dodge(&mut self) -> bool {
+    fn computed_dodge(&mut self) -> bool {
         let dice_result = self.active_info.dodge_dice.get_numer();
 
         let mut is_dodge = false;
@@ -83,7 +83,7 @@ impl Battle {
         is_dodge
     }
 
-    fn is_parry(&mut self, base_damage: i32) -> bool {
+    fn computed_parry(&mut self, base_damage: i32) -> bool {
         let mut is_parry = false;
 
         if self.active_info.parry >= base_damage {
@@ -95,7 +95,7 @@ impl Battle {
         is_parry
     }
 
-    fn thump_damage(&mut self, result: &mut BattleResult, base_damage: i32) -> i32 {
+    fn computed_thump_damage(&mut self, result: &mut BattleResult, base_damage: i32) -> i32 {
         let dice_result = self.active_info.thump_dice.get_numer();
 
         let mut is_thump = false;
@@ -109,22 +109,22 @@ impl Battle {
         base_damage / (200 + self.active_info.thump_coefficient) / 100
     }
 
-    fn resistance_damage(&mut self, base_damage: i32) -> i32 {
+    fn computed_resistance_damage(&mut self, base_damage: i32) -> i32 {
         base_damage / (100 + self.active_info.resistance) / 100
     }
 
-    fn damage(&mut self, result: &mut BattleResult) {
+    fn computed_damage(&mut self, result: &mut BattleResult) {
         let mut damage = self.base_damage();
 
-        let is_parry = self.is_parry(damage);
+        let is_parry = self.computed_parry(damage);
 
         result.is_parry = is_parry;
 
         if is_parry {
             damage = 0;
         } else {
-            damage = self.thump_damage(result, damage);
-            damage = self.resistance_damage(damage);
+            damage = self.computed_thump_damage(result, damage);
+            damage = self.computed_resistance_damage(damage);
         }
 
         result.damage = damage;
