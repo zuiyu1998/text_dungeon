@@ -2,6 +2,7 @@
 
 mod actions;
 mod audio;
+mod editor;
 mod loading;
 mod menu;
 mod player;
@@ -15,9 +16,10 @@ use crate::player::PlayerPlugin;
 use crate::state::AppStatePlugin;
 
 use bevy::app::App;
-#[cfg(debug_assertions)]
-use bevy::diagnostic::{FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin};
 use bevy::prelude::*;
+
+#[cfg(feature = "dev")]
+use editor::InternalEditorPlugin;
 
 pub struct GamePlugin;
 
@@ -32,9 +34,9 @@ impl Plugin for GamePlugin {
             AppStatePlugin,
         ));
 
-        #[cfg(debug_assertions)]
+        #[cfg(feature = "dev")]
         {
-            app.add_plugins((FrameTimeDiagnosticsPlugin, LogDiagnosticsPlugin::default()));
+            app.add_plugins((InternalEditorPlugin,));
         }
     }
 }
