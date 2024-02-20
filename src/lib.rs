@@ -1,18 +1,14 @@
 #![allow(clippy::type_complexity)]
 
-mod actions;
 mod audio;
 mod editor;
 mod loading;
 mod menu;
-mod player;
 mod state;
 
-use crate::actions::ActionsPlugin;
 use crate::audio::InternalAudioPlugin;
 use crate::loading::LoadingPlugin;
 use crate::menu::MenuPlugin;
-use crate::player::PlayerPlugin;
 use crate::state::AppStatePlugin;
 
 use bevy::app::App;
@@ -28,9 +24,7 @@ impl Plugin for GamePlugin {
         app.add_plugins((
             LoadingPlugin,
             MenuPlugin,
-            ActionsPlugin,
             InternalAudioPlugin,
-            PlayerPlugin,
             AppStatePlugin,
         ));
 
