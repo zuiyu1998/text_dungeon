@@ -1,4 +1,4 @@
-use super::{BattleEvent, CharacterProps};
+use super::{BattleActive, BattleEvent, BattleUnactive, CharacterProps, InCombat};
 use bevy::prelude::*;
 
 use crate::GameState;
@@ -87,7 +87,10 @@ fn add_sequenece_marker(
 }
 
 //判定当前帧谁行动
-fn select_charcter(mut commands: Commands, character_q: Query<(Entity, &mut Sequence)>) {
+fn select_charcter(
+    mut commands: Commands,
+    mut character_q: Query<(Entity, &mut Sequence), Without<InCombat>>,
+) {
     let mut sequences = vec![];
 
     for (entity, sequence) in character_q.iter() {
@@ -106,4 +109,22 @@ fn select_charcter(mut commands: Commands, character_q: Query<(Entity, &mut Sequ
     sequences.sort_by(|a, b| a.value.cmp(&b.value));
 
     info!("{:?}", sequences);
+
+    let (first, other) = sequences.split_first().unwrap();
+
+    let mut sequence = character_q
+        .get_component_mut::<Sequence>(first.entity)
+        .unwrap();
+
+    sequence.state = SequenceState::Active;
+
+    commands
+        .entity(first.entity)
+        .insert((BattleActive, InCombat));
+
+    for sequence in other.iter() {
+        commands
+            .entity(sequence.entity)
+            .insert((BattleUnactive(first.entity), InCombat));
+    }
 }

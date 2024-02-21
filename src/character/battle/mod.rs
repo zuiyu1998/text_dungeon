@@ -9,6 +9,9 @@ pub use sequence::*;
 pub struct BattleEvent(pub Vec<Entity>);
 
 #[derive(Component)]
+pub struct InCombat;
+
+#[derive(Component)]
 pub struct BattleActive;
 
 #[derive(Component)]
