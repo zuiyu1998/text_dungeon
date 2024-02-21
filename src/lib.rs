@@ -1,15 +1,18 @@
 #![allow(clippy::type_complexity)]
 
 mod audio;
+mod battle;
+mod character;
 mod editor;
 mod loading;
 mod menu;
 mod state;
 
 use crate::audio::InternalAudioPlugin;
+use crate::battle::BattlePlugin;
 use crate::loading::LoadingPlugin;
 use crate::menu::MenuPlugin;
-use crate::state::AppStatePlugin;
+use crate::state::*;
 
 use bevy::app::App;
 use bevy::prelude::*;
@@ -26,6 +29,7 @@ impl Plugin for GamePlugin {
             MenuPlugin,
             InternalAudioPlugin,
             AppStatePlugin,
+            BattlePlugin,
         ));
 
         #[cfg(feature = "dev")]
