@@ -16,7 +16,10 @@ impl Plugin for CharacterPlugin {
 pub struct Character;
 
 #[derive(Component, Default)]
-pub struct CharacterProps;
+pub struct CharacterProps {
+    //先攻id
+    pub initiative_id: usize,
+}
 
 #[derive(Component, Default)]
 pub struct CharacterName(String);
@@ -25,5 +28,4 @@ pub struct CharacterName(String);
 pub struct CharacterBundle {
     name: CharacterName,
     props: CharacterProps,
-    into_sequence_instace: IntoSequenceInstance,
 }

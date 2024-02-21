@@ -5,8 +5,31 @@ use crate::GameState;
 
 pub struct SequencePlugin;
 
+enum IntoSequenceType {
+    Default,
+    Unkown,
+}
+
+impl From<usize> for IntoSequenceType {
+    fn from(value: usize) -> Self {
+        match value {
+            0 => IntoSequenceType::Default,
+            _ => IntoSequenceType::Unkown,
+        }
+    }
+}
+
 pub trait IntoSequence: 'static + Sync + Send {
     fn into_sequece(&self, props: &CharacterProps) -> Sequence;
+}
+
+pub fn get_into_sequence(id: usize) -> Box<dyn IntoSequence> {
+    let _type: IntoSequenceType = IntoSequenceType::from(id);
+
+    match _type {
+        IntoSequenceType::Default => Box::new(DefaultSequence),
+        _ => Box::new(DefaultSequence),
+    }
 }
 
 pub struct DefaultSequence;
@@ -17,15 +40,6 @@ impl IntoSequence for DefaultSequence {
             value: 0,
             state: SequenceState::None,
         }
-    }
-}
-
-#[derive(Component)]
-pub struct IntoSequenceInstance(Box<dyn IntoSequence>);
-
-impl Default for IntoSequenceInstance {
-    fn default() -> Self {
-        IntoSequenceInstance(Box::new(DefaultSequence))
     }
 }
 
@@ -60,13 +74,13 @@ impl Plugin for SequencePlugin {
 fn add_sequenece_marker(
     mut commands: Commands,
     mut battle_ew: EventReader<BattleEvent>,
-    character_q: Query<(&CharacterProps, &IntoSequenceInstance), Without<Sequence>>,
+    character_q: Query<(&CharacterProps,), Without<Sequence>>,
 ) {
     for e in battle_ew.read() {
         for entity in e.0.iter() {
-            if let Ok((props, into_sequence)) = character_q.get(*entity) {
-                let sequnce = into_sequence.0.into_sequece(props);
-                commands.entity(*entity).insert(sequnce);
+            if let Ok((props,)) = character_q.get(*entity) {
+                let sequence = get_into_sequence(props.initiative_id).into_sequece(props);
+                commands.entity(*entity).insert(sequence);
             }
         }
     }
