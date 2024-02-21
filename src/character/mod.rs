@@ -21,7 +21,7 @@ pub struct CharacterProps;
 #[derive(Component, Default)]
 pub struct CharacterName(String);
 
-#[derive(Bundle)]
+#[derive(Bundle, Default)]
 pub struct CharacterBundle {
     name: CharacterName,
     props: CharacterProps,

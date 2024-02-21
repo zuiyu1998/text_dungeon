@@ -6,7 +6,7 @@ use bevy::prelude::*;
 pub use sequence::*;
 
 #[derive(Event)]
-pub struct BattleEvent(Vec<Entity>);
+pub struct BattleEvent(pub Vec<Entity>);
 
 #[derive(Component)]
 pub struct BattleActive;
@@ -18,6 +18,7 @@ pub struct BattlePlugin;
 
 impl Plugin for BattlePlugin {
     fn build(&self, app: &mut App) {
-        app.add_plugins((SequencePlugin,));
+        app.add_plugins((SequencePlugin,))
+            .add_event::<BattleEvent>();
     }
 }

@@ -4,12 +4,14 @@ mod audio;
 mod character;
 mod editor;
 mod loading;
+mod map;
 mod menu;
 mod state;
 
 use crate::audio::InternalAudioPlugin;
 use crate::character::CharacterPlugin;
 use crate::loading::LoadingPlugin;
+use crate::map::MapPlugin;
 use crate::menu::MenuPlugin;
 use crate::state::*;
 
@@ -29,6 +31,7 @@ impl Plugin for GamePlugin {
             InternalAudioPlugin,
             AppStatePlugin,
             CharacterPlugin,
+            MapPlugin,
         ));
 
         #[cfg(feature = "dev")]

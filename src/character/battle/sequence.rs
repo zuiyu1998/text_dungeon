@@ -85,6 +85,10 @@ fn select_charcter(mut commands: Commands, character_q: Query<(Entity, &mut Sequ
         }
     }
 
+    if sequences.is_empty() {
+        return;
+    }
+
     sequences.sort_by(|a, b| a.value.cmp(&b.value));
 
     info!("{:?}", sequences);
