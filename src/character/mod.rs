@@ -15,10 +15,10 @@ impl Plugin for CharacterPlugin {
 #[derive(Component)]
 pub struct Character;
 
-#[derive(Component)]
+#[derive(Component, Default)]
 pub struct CharacterProps;
 
-#[derive(Component)]
+#[derive(Component, Default)]
 pub struct CharacterName(String);
 
 #[derive(Bundle)]

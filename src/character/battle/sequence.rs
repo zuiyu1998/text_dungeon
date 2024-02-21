@@ -13,7 +13,10 @@ pub struct DefaultSequence;
 
 impl IntoSequence for DefaultSequence {
     fn into_sequece(&self, _props: &CharacterProps) -> Sequence {
-        Sequence(0)
+        Sequence {
+            value: 0,
+            state: SequenceState::None,
+        }
     }
 }
 
@@ -27,30 +30,62 @@ impl Default for IntoSequenceInstance {
 }
 
 #[derive(Component)]
-pub struct Sequence(u8);
+pub struct Sequence {
+    value: u8,
+    state: SequenceState,
+}
+
+#[derive(Debug)]
+pub struct SequenceEntity {
+    entity: Entity,
+    value: u8,
+}
+
+#[derive(PartialEq, Eq)]
+enum SequenceState {
+    None,
+    Active,
+}
 
 impl Plugin for SequencePlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(
             Update,
-            (add_sequenece_marker,).run_if(in_state(GameState::Playing)),
+            (add_sequenece_marker, select_charcter).run_if(in_state(GameState::Playing)),
         );
     }
 }
 
-//对character添加先手标记
+//对character添加先手
 fn add_sequenece_marker(
     mut commands: Commands,
     mut battle_ew: EventReader<BattleEvent>,
-    character_q: Query<(&CharacterProps, &IntoSequenceInstance)>,
+    character_q: Query<(&CharacterProps, &IntoSequenceInstance), Without<Sequence>>,
 ) {
     for e in battle_ew.read() {
         for entity in e.0.iter() {
-            let (props, into_sequence) = character_q.get(*entity).unwrap();
-
-            let sequnce = into_sequence.0.into_sequece(props);
-
-            commands.entity(*entity).insert(sequnce);
+            if let Ok((props, into_sequence)) = character_q.get(*entity) {
+                let sequnce = into_sequence.0.into_sequece(props);
+                commands.entity(*entity).insert(sequnce);
+            }
         }
     }
+}
+
+//判定当前帧谁行动
+fn select_charcter(mut commands: Commands, character_q: Query<(Entity, &mut Sequence)>) {
+    let mut sequences = vec![];
+
+    for (entity, sequence) in character_q.iter() {
+        if sequence.state == SequenceState::None {
+            sequences.push(SequenceEntity {
+                entity,
+                value: sequence.value,
+            });
+        }
+    }
+
+    sequences.sort_by(|a, b| a.value.cmp(&b.value));
+
+    info!("{:?}", sequences);
 }
