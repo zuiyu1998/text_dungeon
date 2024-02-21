@@ -1,14 +1,16 @@
 mod battle;
+mod props;
 
 use bevy::prelude::*;
 
 pub use battle::*;
+pub use props::*;
 
 pub struct CharacterPlugin;
 
 impl Plugin for CharacterPlugin {
     fn build(&self, app: &mut App) {
-        app.add_plugins((BattlePlugin,));
+        app.add_plugins((BattlePlugin, PropsPlugin));
     }
 }
 
@@ -16,16 +18,10 @@ impl Plugin for CharacterPlugin {
 pub struct Character;
 
 #[derive(Component, Default)]
-pub struct CharacterProps {
-    //先攻id
-    pub initiative_id: usize,
-}
-
-#[derive(Component, Default)]
 pub struct CharacterName(String);
 
 #[derive(Bundle, Default)]
 pub struct CharacterBundle {
-    name: CharacterName,
-    props: CharacterProps,
+    pub name: CharacterName,
+    pub props: CharacterProps,
 }

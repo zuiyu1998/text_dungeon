@@ -1,7 +1,7 @@
 use super::{BattleActive, BattleEvent, BattleUnactive, CharacterProps, InCombat};
 use bevy::prelude::*;
 
-use crate::GameState;
+use crate::{character::PropEnum, GameState};
 
 pub struct SequencePlugin;
 
@@ -35,9 +35,11 @@ pub fn get_into_sequence(id: usize) -> Box<dyn IntoSequence> {
 pub struct DefaultSequence;
 
 impl IntoSequence for DefaultSequence {
-    fn into_sequece(&self, _props: &CharacterProps) -> Sequence {
+    fn into_sequece(&self, props: &CharacterProps) -> Sequence {
+        let value = props.get_prop(&PropEnum::Initiative).unwrap().get_value() as u8;
+
         Sequence {
-            value: 0,
+            value,
             state: SequenceState::None,
         }
     }
@@ -106,7 +108,7 @@ fn select_charcter(
         return;
     }
 
-    sequences.sort_by(|a, b| a.value.cmp(&b.value));
+    sequences.sort_by(|a, b| b.value.cmp(&a.value));
 
     info!("{:?}", sequences);
 
