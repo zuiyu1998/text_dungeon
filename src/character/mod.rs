@@ -1,5 +1,16 @@
-use crate::battle::IntoSequenceInstance;
+mod battle;
+
 use bevy::prelude::*;
+
+pub use battle::*;
+
+pub struct CharacterPlugin;
+
+impl Plugin for CharacterPlugin {
+    fn build(&self, app: &mut App) {
+        app.add_plugins((BattlePlugin,));
+    }
+}
 
 #[derive(Component)]
 pub struct Character;

@@ -1,7 +1,6 @@
 #![allow(clippy::type_complexity)]
 
 mod audio;
-mod battle;
 mod character;
 mod editor;
 mod loading;
@@ -9,7 +8,7 @@ mod menu;
 mod state;
 
 use crate::audio::InternalAudioPlugin;
-use crate::battle::BattlePlugin;
+use crate::character::CharacterPlugin;
 use crate::loading::LoadingPlugin;
 use crate::menu::MenuPlugin;
 use crate::state::*;
@@ -29,7 +28,7 @@ impl Plugin for GamePlugin {
             MenuPlugin,
             InternalAudioPlugin,
             AppStatePlugin,
-            BattlePlugin,
+            CharacterPlugin,
         ));
 
         #[cfg(feature = "dev")]

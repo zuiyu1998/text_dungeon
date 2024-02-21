@@ -1,6 +1,6 @@
 mod sequence;
 
-use crate::character::{Character, CharacterProps};
+use crate::character::CharacterProps;
 use bevy::prelude::*;
 
 pub use sequence::*;
