@@ -3,6 +3,23 @@ use bevy::{prelude::*, utils::HashMap};
 #[derive(Debug, Hash, Clone, Copy, PartialEq, Eq)]
 pub enum PropEnum {
     Initiative,
+    Power,
+    Agile,
+    Constitution,
+    Intelligence,
+    Charm,
+    Perception,
+    Dodge,
+    Burden,
+    PysicalHit,
+    MagicHit,
+    Armor,
+    Parrying,
+    Thump,
+    Defense,
+    ThumpRate,
+    ThumpRateDefault,
+    HealthMax,
 }
 
 pub struct PropValue {
