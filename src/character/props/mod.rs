@@ -48,7 +48,7 @@ impl Default for PropValue {
     }
 }
 
-#[derive(Component)]
+#[derive(Component, Default)]
 pub struct CharacterProps {
     //先攻id
     pub initiative_id: usize,
@@ -62,19 +62,6 @@ impl CharacterProps {
 
     pub fn get_mut_prop(&mut self, key: &PropEnum) -> Option<&mut PropValue> {
         self.props.get_mut(key)
-    }
-}
-
-impl Default for CharacterProps {
-    fn default() -> Self {
-        let mut map: HashMap<PropEnum, PropValue> = HashMap::default();
-
-        map.insert(PropEnum::Initiative, PropValue::default());
-
-        Self {
-            initiative_id: 0,
-            props: map,
-        }
     }
 }
 
