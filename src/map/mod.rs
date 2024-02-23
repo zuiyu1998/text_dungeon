@@ -15,12 +15,12 @@ pub struct Test1;
 
 impl Plugin for MapPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(OnEnter(GameState::Playing), (spwan_playe, spawn_enemy));
+        app.add_systems(OnEnter(GameState::Playing), (spwan_player, spawn_enemy));
         app.add_systems(Update, test_attack.run_if(in_state(GameState::Playing)));
     }
 }
 
-fn spwan_playe(mut commands: Commands, character_db: CharacterPropsDb) {
+fn spwan_player(mut commands: Commands, character_db: CharacterPropsDb) {
     let mut props: CharacterProps = Default::default();
     props.from_db(&character_db);
 
@@ -41,7 +41,13 @@ fn spawn_enemy(mut commands: Commands, character_db: CharacterPropsDb) {
     let mut props: CharacterProps = Default::default();
     props.from_db(&character_db);
 
-    commands.spawn((CharacterBundle::default(), Test1));
+    commands.spawn((
+        CharacterBundle {
+            props,
+            ..Default::default()
+        },
+        Test1,
+    ));
 }
 
 fn test_attack(

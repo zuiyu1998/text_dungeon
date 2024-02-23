@@ -51,6 +51,7 @@ impl From<&str> for PropEnum {
     }
 }
 
+#[derive(Debug)]
 pub struct PropValue {
     max: f32,
     value: f32,
@@ -77,12 +78,12 @@ impl Default for PropValue {
     }
 }
 
-#[derive(Default)]
+#[derive(Default, Debug)]
 pub struct CharacterPropsMeta {
     pub id: usize,
 }
 
-#[derive(Component, Default)]
+#[derive(Component, Default, Debug)]
 pub struct CharacterProps {
     //先攻id
     pub initiative_id: usize,
