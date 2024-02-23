@@ -4,14 +4,13 @@ use bevy::prelude::*;
 
 pub use character_props::*;
 
-pub struct CharacterPropsModel {
-    initiative_id: usize,
-}
-
 pub struct DbPlugin;
 
 impl Plugin for DbPlugin {
     fn build(&self, app: &mut App) {
-        app.init_asset_loader::<CharacterPropValuesAssetLoader>();
+        app.init_asset_loader::<CharacterPropValuesAssetLoader>()
+            .init_asset_loader::<CharacterPropsAssetLoader>()
+            .init_asset::<CharacterPropValuesAsset>()
+            .init_asset::<CharacterPropsAsset>();
     }
 }

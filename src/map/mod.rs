@@ -1,5 +1,6 @@
 use crate::{
     character::{BattleEvent, CharacterBundle, CharacterProps, PropEnum},
+    db::CharacterPropsDb,
     GameState,
 };
 use bevy::prelude::*;
@@ -19,8 +20,9 @@ impl Plugin for MapPlugin {
     }
 }
 
-fn spwan_playe(mut commands: Commands) {
+fn spwan_playe(mut commands: Commands, character_db: CharacterPropsDb) {
     let mut props: CharacterProps = Default::default();
+    props.from_db(&character_db);
 
     if let Some(prop) = props.get_mut_prop(&PropEnum::Initiative) {
         prop.set_value(20.0);
@@ -35,7 +37,10 @@ fn spwan_playe(mut commands: Commands) {
     ));
 }
 
-fn spawn_enemy(mut commands: Commands) {
+fn spawn_enemy(mut commands: Commands, character_db: CharacterPropsDb) {
+    let mut props: CharacterProps = Default::default();
+    props.from_db(&character_db);
+
     commands.spawn((CharacterBundle::default(), Test1));
 }
 

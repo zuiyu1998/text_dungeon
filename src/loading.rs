@@ -1,4 +1,4 @@
-use crate::db::CharacterPropValuesAsset;
+use crate::db::CharacterPropsAssets;
 use crate::state::AppState;
 use bevy::prelude::*;
 use bevy_asset_loader::prelude::*;
@@ -16,14 +16,9 @@ impl Plugin for LoadingPlugin {
                 .continue_to_state(AppState::MainMenu)
                 .load_collection::<AudioAssets>()
                 .load_collection::<TextureAssets>()
-                .load_collection::<CharacterPropValuesAssets>(),
+                .load_collection::<CharacterPropsAssets>(),
         );
     }
-}
-
-#[derive(AssetCollection, Resource)]
-pub struct CharacterPropValuesAssets {
-    pub defalut: Handle<CharacterPropValuesAsset>,
 }
 
 // the following asset collections will be loaded during the State `GameState::Loading`
