@@ -2,11 +2,11 @@ use bevy::{prelude::*, utils::HashMap};
 
 use crate::db::{CharacterPropValuesAsset, CharacterPropsDb, CharacterPropsModel};
 
-#[derive(Default, Debug)]
+#[derive(Default, Debug, Clone, Copy)]
 
 pub enum BattleEnum {
     #[default]
-    Splash,
+    Slash,
 }
 
 #[derive(Debug, Hash, Clone, Copy, PartialEq, Eq)]
@@ -94,6 +94,8 @@ pub struct CharacterPropsMeta {
 pub struct CharacterProps {
     //先攻id
     pub initiative_id: usize,
+    //类型转换器id
+    pub conventer_id: usize,
     pub props: HashMap<PropEnum, PropValue>,
     pub meta: CharacterPropsMeta,
     pub battle_enum: BattleEnum,

@@ -1,5 +1,5 @@
 use super::{
-    get_into_sequence, BattleActive, BattleEvent, BattleUnactive, CharacterProps, InCombat,
+    get_into_sequence, Battle, BattleActive, BattleEvent, BattleUnactive, CharacterProps, InCombat,
     Sequence, SequenceEntity, SequenceState,
 };
 use bevy::prelude::*;
@@ -60,5 +60,19 @@ pub fn select_charcter(
         commands
             .entity(sequence.entity)
             .insert((BattleUnactive(first.entity), InCombat));
+    }
+}
+
+//计算伤害
+pub fn start_battle(
+    mut unactive_character_q: Query<(&BattleUnactive, &CharacterProps), With<InCombat>>,
+    mut active_character_q: Query<&CharacterProps, (With<InCombat>, With<BattleActive>)>,
+) {
+    for (unactive, unactive_props) in unactive_character_q.iter() {
+        let active_props = active_character_q.get(unactive.0).unwrap();
+
+        let battle = Battle::new(active_props, unactive_props);
+
+        battle.start();
     }
 }
