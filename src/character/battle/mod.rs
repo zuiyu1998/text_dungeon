@@ -1,9 +1,11 @@
 mod sequence;
-
-use crate::character::CharacterProps;
-use bevy::prelude::*;
+mod systems;
 
 pub use sequence::*;
+
+use crate::{character::CharacterProps, state::GameState};
+use bevy::prelude::*;
+use systems::{add_sequenece_marker, select_charcter};
 
 #[derive(Event)]
 pub struct BattleEvent(pub Vec<Entity>);
@@ -21,7 +23,9 @@ pub struct BattlePlugin;
 
 impl Plugin for BattlePlugin {
     fn build(&self, app: &mut App) {
-        app.add_plugins((SequencePlugin,))
-            .add_event::<BattleEvent>();
+        app.add_event::<BattleEvent>().add_systems(
+            Update,
+            (add_sequenece_marker, select_charcter).run_if(in_state(GameState::Playing)),
+        );
     }
 }

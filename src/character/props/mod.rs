@@ -2,6 +2,13 @@ use bevy::{prelude::*, utils::HashMap};
 
 use crate::db::{CharacterPropValuesAsset, CharacterPropsDb, CharacterPropsModel};
 
+#[derive(Default, Debug)]
+
+pub enum BattleEnum {
+    #[default]
+    Splash,
+}
+
 #[derive(Debug, Hash, Clone, Copy, PartialEq, Eq)]
 pub enum PropEnum {
     Initiative,
@@ -89,6 +96,7 @@ pub struct CharacterProps {
     pub initiative_id: usize,
     pub props: HashMap<PropEnum, PropValue>,
     pub meta: CharacterPropsMeta,
+    pub battle_enum: BattleEnum,
 }
 
 impl CharacterProps {
