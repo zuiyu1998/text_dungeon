@@ -5,25 +5,25 @@ var active_item_index = 0
 var unactive_item_index = 1
 
 func _sort():
-    items.sort_custom(func(a: BattleItem, b: BattleItem): return a.first_attack_judgment.first_attack > b.first_attack_judgment.first_attack)
+	items.sort_custom(func(a: BattleItem, b: BattleItem): return a.first_attack_judgment.first_attack > b.first_attack_judgment.first_attack)
 
 
 static func new_battle_system(stats: Array[Stats]) -> BattleSystem:
-    var battle_system = BattleSystem.new()
-    battle_system.items = stats.map(new_battle_item)
-    battle_system._sort()
+	var battle_system = BattleSystem.new()
+	battle_system.items = stats.map(new_battle_item)
+	battle_system._sort()
 
-    return battle_system
+	return battle_system
 
 static func new_battle_item(stats: Stats) -> BattleItem:
-    var item = BattleItem.new()
-    item.stats = stats
-    item.options = BattleOptions.from_stats(stats)
-    item.first_attack_judgment = FirstAttackJudgment.from_battle_options(item.options)
+	var item = BattleItem.new()
+	item.stats = stats
+	item.options = BattleOptions.from_stats(stats)
+	item.first_attack_judgment = FirstAttackJudgment.from_battle_options(item.options)
 
-    return item
+	return item
 
 class BattleItem:
-    var options: BattleOptions
-    var stats: Stats
-    var first_attack_judgment: FirstAttackJudgment
+	var options: BattleOptions
+	var stats: Stats
+	var first_attack_judgment: FirstAttackJudgment
