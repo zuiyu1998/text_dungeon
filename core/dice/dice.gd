@@ -1,26 +1,28 @@
-class_name Dice extends RangeBuilder
+class_name Dice
 
 var _options: DiceOption
 
 var _rand: RandomNumberGenerator
 
 
-func get_range_result() -> RangeResult:
-	var res = RangeResult.new()
-	var num = _rand.randf_range(_options.min_count, _options.max_count)
-
-	res.number = num
+func get_range_result() -> DiceResult:
+	var res = DiceResult.new()
+	var rand_number_builder = RandNumberBuilder.new()
+	rand_number_builder.rand = _rand
+	rand_number_builder.max_value = _options.max_count
+	rand_number_builder.min_value = _options.min_count
+	var num = rand_number_builder.build()
 
 	if num == _options.max_count:
-		res.state = RangeResult.RangeResultState.GreatSuccess
+		res.state = DiceResult.DiceResultState.GreatSuccess
 	elif num == _options.min_count:
-		res.state = RangeResult.RangeResultState.GreatFail
+		res.state = DiceResult.DiceResultState.GreatFail
 	elif (num + _options.max_offset) >= _options.max_count:
-		res.state = RangeResult.RangeResultState.Success
+		res.state = DiceResult.DiceResultState.Success
 	elif (num - _options.min_offset) <= _options.min_count:
-		res.state = RangeResult.RangeResultState.Fail
+		res.state = DiceResult.DiceResultState.Fail
 	else:
-		res.state = RangeResult.RangeResultState.Normal
+		res.state = DiceResult.DiceResultState.Normal
 	return res
 
 static func new_dice(rand: RandomNumberGenerator, max_count: int = 20, min_count: int = 1, max_offset: int = 0, min_offset: int = 0) -> Dice:
