@@ -4,6 +4,16 @@ var items: Array[BattleItem]
 var active_item_index = 0
 var unactive_item_index = 1
 
+func start_battle():
+	var rand := RandomNumberGenerator.new()
+	var active_item: BattleItem = items[active_item_index]
+	var unactive_item: BattleItem = items[unactive_item_index]
+
+	var _battle_calculator = BattleCalculator.new_battle_calculator(active_item.options, unactive_item.options, rand)
+	
+	pass
+
+
 func _sort():
 	items.sort_custom(func(a: BattleItem, b: BattleItem): return a.first_attack_judgment.first_attack > b.first_attack_judgment.first_attack)
 
