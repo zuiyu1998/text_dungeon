@@ -1,5 +1,32 @@
 extends GutTest
 
+func test_hit_calculator():
+	var hit_calculator = HitCalculator.new()
+	hit_calculator.dodge_hit = 10
+	hit_calculator.dodge = 0
+	
+	var res = hit_calculator.get_result()
+	assert_eq(res.hit, true)
+	assert_eq(res.dodge_success, false)
+	
+	hit_calculator.dodge = 11
+	hit_calculator.armor_hit = 10
+	hit_calculator.armor = 0
+	
+	res = hit_calculator.get_result()
+	assert_eq(res.hit, true)
+	assert_eq(res.armor_success, false)
+	
+	hit_calculator.armor = 11
+	
+	res = hit_calculator.get_result()
+	assert_eq(res.hit, false)
+	assert_eq(res.dodge_success, true)
+	assert_eq(res.armor_success, true)
+	
+	
+	
+
 func test_battle_system():
 	var battle_system = BattleSystem.new()
 	var first_judgment = FirstAttackJudgment.new()
