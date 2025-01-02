@@ -4,13 +4,19 @@ var items: Array[BattleItem]
 var active_item_index = 0
 var unactive_item_index = 1
 
+func get_battle_calculator(active: BattleItem, unactive: BattleItem, rand: RandomNumberGenerator) -> BattleCalculator:
+	var number_builder = RandNumberBuilder.new_number_builder(rand, active.options.physical_hit_dice_options.max_count, active.options.physical_hit_dice_options.min_count);
+	return BattleCalculator.new_battle_calculator(active.options, unactive.options, number_builder)
+
 func start_battle():
 	var rand := RandomNumberGenerator.new()
 	var active_item: BattleItem = items[active_item_index]
 	var unactive_item: BattleItem = items[unactive_item_index]
 
-	var _battle_calculator = BattleCalculator.new_battle_calculator(active_item.options, unactive_item.options, rand)
+	var battle_calculator = get_battle_calculator(active_item, unactive_item, rand)
 	
+	var _battle_res = battle_calculator.get_result()
+
 	pass
 
 

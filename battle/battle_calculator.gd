@@ -20,19 +20,23 @@ static func get_dodge(options: BattleOptions) -> int:
 	return manager.get_battle_number()
 
 static func get_hit(options: BattleOptions) -> int:
-	var dodge = BattleOptionBuilder.new_battle_option_builder(options, "hit")
+	var hit = BattleOptionBuilder.new_battle_option_builder(options, "hit")
 	
 	var manager = BattleNumberManager.new()
-	manager.data = [dodge]
+	manager.data = [hit]
 
 	return manager.get_battle_number()
 
-static func new_battle_calculator(active: BattleOptions, unactive: BattleOptions, _rand: RandomNumberGenerator) -> BattleCalculator:
+static func new_battle_calculator(active: BattleOptions, unactive: BattleOptions, number_builder: NumberBuilder) -> BattleCalculator:
 	var calculator = BattleCalculator.new()
 	var hit = BattleCalculator.get_hit(active)
+	
+	var dice = Dice.new_dice_from_options(number_builder, active.physical_hit_dice_options)
+
 	calculator.hit_calculator.dodge_hit = hit
 	calculator.hit_calculator.dodge = BattleCalculator.get_dodge(unactive)
 	calculator.hit_calculator.armor = BattleCalculator.get_armor(unactive)
+	calculator.dice = dice
 	calculator.hit_calculator.armor_hit = hit
 
 	return calculator
