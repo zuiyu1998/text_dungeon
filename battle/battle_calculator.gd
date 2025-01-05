@@ -7,40 +7,40 @@ static func get_armor(options: BattleOptions) -> int:
 	var dodge = BattleOptionBuilder.new_battle_option_builder(options, "armor")
 	
 	var manager = BattleNumberManager.new()
-	manager.data = [dodge]
-
+	manager.data.assign([dodge])
+	
 	return manager.get_battle_number()
 
 static func get_damage(options: BattleOptions) -> int:
 	var damage = BattleOptionBuilder.new_battle_option_builder(options, "damage")
 	
 	var manager = BattleNumberManager.new()
-	manager.data = [damage]
-
+	manager.data.assign([damage])
+	
 	return manager.get_battle_number()
 
 static func get_coordinate(options: BattleOptions) -> int:
-	var damage = BattleOptionBuilder.new_battle_option_builder(options, "coordinate")
+	var coordinate = BattleOptionBuilder.new_battle_option_builder(options, "coordinate")
 	
 	var manager = BattleNumberManager.new()
-	manager.data = [damage]
+	manager.data.assign([coordinate])
 
 	return manager.get_battle_number()
 
 static func get_thump(options: BattleOptions) -> int:
-	var damage = BattleOptionBuilder.new_battle_option_builder(options, "thump")
+	var thump = BattleOptionBuilder.new_battle_option_builder(options, "thump")
 	
 	var manager = BattleNumberManager.new()
-	manager.data = [damage]
+	manager.data.assign([thump])
 
 	return manager.get_battle_number()
 
 static func get_thump_magnification(options: BattleOptions) -> int:
-	var damage = BattleOptionBuilder.new_battle_option_builder(options, "thump_magnification")
+	var thump_magnification = BattleOptionBuilder.new_battle_option_builder(options, "thump_magnification")
 	
 	var manager = BattleNumberManager.new()
-	manager.data = [damage]
-
+	manager.data.assign([thump_magnification])
+	
 	return manager.get_battle_number()
 
 
@@ -48,30 +48,35 @@ static func get_dodge(options: BattleOptions) -> int:
 	var dodge = BattleOptionBuilder.new_battle_option_builder(options, "dodge")
 	
 	var manager = BattleNumberManager.new()
-	manager.data = [dodge]
-
+	manager.data.assign([dodge])
 	return manager.get_battle_number()
 
 
-static func get_hit(options: BattleOptions) -> int:
-	var hit = BattleOptionBuilder.new_battle_option_builder(options, "hit")
+static func get_physical_hit(options: BattleOptions) -> int:
+	var hit = BattleOptionBuilder.new_battle_option_builder(options, "physical_hit")
 	
 	var manager = BattleNumberManager.new()
-	manager.data = [hit]
+	manager.data.assign([hit])
 
 	return manager.get_battle_number()
 
-static func new_battle_calculator(active: BattleOptions, unactive: BattleOptions, number_builder: NumberBuilder) -> BattleCalculator:
+static func new_battle_calculator_from_rand(active: BattleOptions, unactive: BattleOptions, rand: RandomNumberGenerator) -> BattleCalculator:
+	var physical_hit_number_builder = RandNumberBuilder.new_number_builder(rand, active.physical_hit_dice_options.max_count, active.physical_hit_dice_options.min_count)
+	var thump_number_builder = RandNumberBuilder.new_number_builder(rand, active.thump_dice_options.max_count, active.thump_dice_options.min_count)
+
+	return new_battle_calculator(active, unactive, physical_hit_number_builder, thump_number_builder)
+
+static func new_battle_calculator(active: BattleOptions, unactive: BattleOptions, physical_hit_number_builder: NumberBuilder, thump_number_builder: NumberBuilder) -> BattleCalculator:
 	var calculator = BattleCalculator.new()
-	var hit = BattleCalculator.get_hit(active)
+	var hit = BattleCalculator.get_physical_hit(active)
 	
-	var dice = Dice.new_dice_from_options(number_builder, active.physical_hit_dice_options)
-	var thump_dice = Dice.new_dice_from_options(number_builder, active.thump_dice_options)
+	var physical_hit_dice = Dice.new_dice_from_options(physical_hit_number_builder, active.physical_hit_dice_options)
+	var thump_dice = Dice.new_dice_from_options(thump_number_builder, active.thump_dice_options)
 
 	calculator.hit_calculator.dodge_hit = hit
 	calculator.hit_calculator.dodge = BattleCalculator.get_dodge(unactive)
 	calculator.hit_calculator.armor = BattleCalculator.get_armor(unactive)
-	calculator.dice = dice
+	calculator.hit_calculator.dice = physical_hit_dice
 	calculator.hit_calculator.armor_hit = hit
 
 	calculator.damage_calculator.damage = BattleCalculator.get_damage(active)

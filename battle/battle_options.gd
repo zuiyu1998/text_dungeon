@@ -27,6 +27,8 @@ var coordinate: int = 10
 # 重击
 var thump: int = 0
 
+var thump_magnification: int = 150
+
 # 物理命中骰子
 var thump_dice_options: Dice.DiceOption = Dice.DiceOption.new()
 

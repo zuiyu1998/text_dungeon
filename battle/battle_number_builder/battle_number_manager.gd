@@ -2,8 +2,5 @@ class_name BattleNumberManager
 
 var data: Array[BattleNumberBuilder] = []
 
-func sum(a: BattleNumberBuilder, b: BattleNumberBuilder):
-    return a.get_number() + b.get_number()
-
 func get_battle_number():
-   return data.reduce(sum,0)
+	return data.map(func (item): return item.get_number()).reduce(func (a, b): return a + b, 0)
