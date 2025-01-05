@@ -1,6 +1,27 @@
 extends GutTest
 
 func test_battle_calculator():
+	var first_options = BattleOptions.new()
+	first_options.damage = 10
+
+	var second_options = BattleOptions.new()
+
+	second_options.resistance_map[first_options.damage_type] = 150
+
+	var physical_hit_number_builder = FixedNumberBuilder.new_number_builder(11)
+	var thump_number_builder = FixedNumberBuilder.new_number_builder(11)
+
+
+	var battle_calculator = BattleCalculator.new_battle_calculator(first_options, second_options, physical_hit_number_builder, thump_number_builder)
+
+	var battle_res = battle_calculator.get_result()
+
+	assert_eq(battle_res.hit_result.hit, true)
+	assert_eq(battle_res.damage_result.is_thump, true)
+	assert_eq(battle_res.damage_result.thump_damage, 15)
+	assert_eq(battle_res.damage_result.resistance_damage, 8)
+
+func test_damage_calculator():
 	var number_builder = FixedNumberBuilder.new_number_builder(11)
 	var options = Dice.DiceOption.new()
 	var dice = Dice.new_dice_from_options(number_builder, options)
