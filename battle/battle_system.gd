@@ -8,12 +8,17 @@ func get_battle_calculator_result(active: BattleItem, unactive: BattleItem, rand
 	var battle_calculator = BattleCalculator.new_battle_calculator_from_rand(active.options, unactive.options, rand)
 	return battle_calculator.get_result()
 
+
 func start_battle():
 	var rand := RandomNumberGenerator.new()
 	var active_item: BattleItem = items[active_item_index]
 	var unactive_item: BattleItem = items[unactive_item_index]
 
-	var _battle_res = get_battle_calculator_result(active_item, unactive_item, rand)
+	var battle_res = get_battle_calculator_result(active_item, unactive_item, rand)
+
+	var effct = BattleStatsEffect.new_battle_stats_effect(battle_res)
+
+	unactive_item.stats.apply_effcts([effct])
 
 	pass
 

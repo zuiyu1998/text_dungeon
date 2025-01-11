@@ -49,4 +49,6 @@ func get_damage_result() -> DamageResult:
 
 	damage_result.resistance_damage = tmp_damage
 
+	damage_result.damage = tmp_damage
+
 	return damage_result

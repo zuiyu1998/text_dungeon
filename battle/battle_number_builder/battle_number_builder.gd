@@ -1,4 +1,4 @@
 class_name BattleNumberBuilder
 
 func get_number() -> int:
-    return 0
+	return 0

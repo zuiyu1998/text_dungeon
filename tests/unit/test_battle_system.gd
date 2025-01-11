@@ -1,5 +1,42 @@
 extends GutTest
 
+func test_battle_effct():
+	var first_options = BattleOptions.new()
+	first_options.damage = 10
+
+	var second_options = BattleOptions.new()
+
+	second_options.resistance_map[first_options.damage_type] = 150
+
+	var physical_hit_number_builder = FixedNumberBuilder.new_number_builder(11)
+	var thump_number_builder = FixedNumberBuilder.new_number_builder(11)
+
+	var battle_calculator = BattleCalculator.new_battle_calculator(first_options, second_options, physical_hit_number_builder, thump_number_builder)
+
+	var battle_res = battle_calculator.get_result()
+
+
+	assert_eq(battle_res.hit_result.hit, true)
+	assert_eq(battle_res.damage_result.is_thump, true)
+	assert_eq(battle_res.damage_result.thump_damage, 15)
+	assert_eq(battle_res.damage_result.resistance_damage, 8)
+	assert_eq(battle_res.damage_result.damage, 8)
+
+	var stats = Stats.new()
+
+	stats._base_props = Props.new()
+	stats._props = Props.new()
+	stats._state = StatsState.new()
+	stats._state.max_health = 10
+	stats._state.health = 10
+
+	var effct = BattleStatsEffect.new_battle_stats_effect(battle_res)
+
+	stats.apply_effcts([effct])
+
+	assert_eq(stats._state.health, 2)
+
+
 func test_battle_calculator():
 	var first_options = BattleOptions.new()
 	first_options.damage = 10
@@ -20,6 +57,7 @@ func test_battle_calculator():
 	assert_eq(battle_res.damage_result.is_thump, true)
 	assert_eq(battle_res.damage_result.thump_damage, 15)
 	assert_eq(battle_res.damage_result.resistance_damage, 8)
+	assert_eq(battle_res.damage_result.damage, 8)
 
 func test_damage_calculator():
 	var number_builder = FixedNumberBuilder.new_number_builder(11)

@@ -14,3 +14,5 @@ var resistance_damage: int = 0
 
 # 伤害类型
 var damage_type: Damage.DamageType
+
+var damage: int = 0
