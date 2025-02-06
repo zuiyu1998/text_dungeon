@@ -4,7 +4,7 @@ signal health_update
 
 var _base_props: Props
 
-var _props: Props
+var _props: Props = PropConst.get_default_props()
 var _state: StatsState = StatsState.new()
 
 

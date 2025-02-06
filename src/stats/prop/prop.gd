@@ -22,6 +22,19 @@ static func new_prop(prop_name: String, value: float, max_value: float = 100, mi
 	prop._prop_name = prop_name
 	return prop
 
+func to_dic() -> Dictionary:
+	var v = {}
+	
+	v["prop_name"] = _prop_name
+	v["value"] = _value
+	v["max_value"] = _max_value
+	v["min_value"] = _min_value
+	v["max_limit"] = _max_limit
+	v["min_limit"] = _min_limit
+
+	return v
+
+
 func get_name() -> String:
 	return _prop_name
 

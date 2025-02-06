@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PropResource" load_steps=2 format=3 uid="uid://d01yiwiiod3od"]
+
+[ext_resource type="Script" path="res://src/stats/prop/resource/prop_resource.gd" id="1_0jq4l"]
+
+[resource]
+script = ExtResource("1_0jq4l")
+prop_name = "power"
+value = 10.0
+max_value = 100.0
+min_value = 0.0
+max_limit = 1000.0
+min_limit = 0.0
