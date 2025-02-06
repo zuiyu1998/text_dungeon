@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://xwhnuu6lot"]
+
+[ext_resource type="Texture2D" uid="uid://qvsyts3wotpy" path="res://src/player/health.png" id="1_lcxwt"]
+[ext_resource type="Script" path="res://src/player/player_ui.gd" id="1_vcasa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ab7qe"]
+atlas = ExtResource("1_lcxwt")
+region = Rect2(240, 21, 48, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bch0q"]
+atlas = ExtResource("1_lcxwt")
+region = Rect2(0, 21, 48, 6)
+
+[node name="PlayerUi" type="CanvasLayer"]
+script = ExtResource("1_vcasa")
+
+[node name="Health" type="TextureProgressBar" parent="."]
+offset_left = 20.0
+offset_top = 16.0
+offset_right = 68.0
+offset_bottom = 22.0
+scale = Vector2(4, 4)
+max_value = 1.0
+step = 0.01
+value = 0.6
+texture_under = SubResource("AtlasTexture_ab7qe")
+texture_progress = SubResource("AtlasTexture_bch0q")
+metadata/_edit_use_anchors_ = true

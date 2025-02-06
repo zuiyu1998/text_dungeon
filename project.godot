@@ -11,9 +11,18 @@ config_version=5
 [application]
 
 config/name="text_dungeon"
+run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GLOBAL="*res://auto_load/global.tscn"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

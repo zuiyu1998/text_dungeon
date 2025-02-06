@@ -16,6 +16,9 @@ func start_battle():
 
 	var battle_res = get_battle_calculator_result(active_item, unactive_item, rand)
 
+	print_debug(battle_res.hit_result.hit)
+	print_debug(battle_res.damage_result.damage)
+
 	var effct = BattleStatsEffect.new_battle_stats_effect(battle_res)
 
 	unactive_item.stats.apply_effcts([effct])
@@ -29,7 +32,7 @@ func _sort():
 
 static func new_battle_system(stats: Array[Stats]) -> BattleSystem:
 	var battle_system = BattleSystem.new()
-	battle_system.items = stats.map(new_battle_item)
+	battle_system.items.assign(stats.map(new_battle_item))
 	battle_system._sort()
 
 	return battle_system
