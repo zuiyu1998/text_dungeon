@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="PropResource" load_steps=2 format=3 uid="uid://d01yiwiiod3od"]
+[gd_resource type="Resource" script_class="PropResource" load_steps=2 format=3 uid="uid://d2tkd2xvi6wdn"]
 
 [ext_resource type="Script" path="res://src/prop/resource/prop_resource.gd" id="1_0jq4l"]
 
 [resource]
 script = ExtResource("1_0jq4l")
-prop_name = "power"
+prop_name = "constitution"
 value = 10.0
 max_value = 100.0
 min_value = 0.0
