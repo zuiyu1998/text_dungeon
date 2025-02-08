@@ -4,19 +4,23 @@ signal health_update
 
 var _base_props: Props
 
-var _props: Props = PropConst.get_default_props()
+var _props: Props 
 var _state: StatsState = StatsState.new()
 
+# 获取伤害
+func get_damage() -> int:
+	return _props.get_prop("power").get_value()
 
 static func new_stats():
-	var new_stats = Stats.new()
-	var props = Props.new()
-	new_stats._base_props = props
-	new_stats._base_props = Props.from_dic(props.to_dic())
+	var new_v = Stats.new()
+	var props = PropConst.get_default_props()
+	new_v._base_props = props
+	new_v._props = PropConst.get_default_props()
+	new_v._props.from_dic(props.to_dic())
+
+	new_v._on_bind()
 	
-	new_stats._on_bind()
-	
-	return new_stats
+	return new_v
 
 func get_health_progress() -> float:
 	var progress = _state.health * 1.0 / _state.max_health
