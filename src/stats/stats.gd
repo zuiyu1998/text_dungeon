@@ -9,7 +9,7 @@ var _state: StatsState = StatsState.new()
 
 # 获取伤害
 func get_damage() -> int:
-	return _props.get_prop("power").get_value()
+	return 2
 
 static func new_stats():
 	var new_v = Stats.new()

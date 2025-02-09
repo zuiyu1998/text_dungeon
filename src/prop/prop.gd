@@ -35,6 +35,9 @@ func to_dic() -> Dictionary:
 	return v
 
 
+func update_value(v: float):
+	_value += v
+
 func get_name() -> String:
 	return _prop_name
 

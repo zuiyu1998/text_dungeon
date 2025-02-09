@@ -19,6 +19,9 @@ var max_limit: float
 @export
 var min_limit: float
 
+@export
+var effcts: Array[PropEffect] = []
+
 func into_prop() -> Prop:
 	var prop = Prop.new()
 	prop._prop_name = prop_name
