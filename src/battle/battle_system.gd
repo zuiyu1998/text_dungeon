@@ -17,7 +17,6 @@ func start_battle():
 	var battle_res = get_battle_calculator_result(active_item, unactive_item, rand)
 
 	print_debug(battle_res.hit_result.hit)
-	print_debug(battle_res.damage_result.damage)
 
 	var effct = BattleStatsEffect.new_battle_stats_effect(battle_res)
 

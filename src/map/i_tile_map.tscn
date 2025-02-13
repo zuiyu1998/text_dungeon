@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpyqlqvut3p42"]
+
+[ext_resource type="Script" path="res://src/map/i_tile_map.gd" id="1_g2yik"]
+[ext_resource type="Script" path="res://src/map/Itile_map_data.gd" id="1_okdm0"]
+[ext_resource type="PackedScene" uid="uid://d0reyuh7j0jwn" path="res://src/enemy/enemy.tscn" id="3_m5ytt"]
+
+[node name="ITileMap" type="Node2D"]
+script = ExtResource("1_g2yik")
+
+[node name="ITileMapData" type="Node2D" parent="."]
+script = ExtResource("1_okdm0")
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="TileSlot" type="Node2D" parent="Body"]
+
+[node name="Enemy" parent="Body/TileSlot" instance=ExtResource("3_m5ytt")]
+position = Vector2(511, 160)
+
+[node name="TileSlot2" type="Node2D" parent="Body"]
+
+[node name="Enemy" parent="Body/TileSlot2" instance=ExtResource("3_m5ytt")]
+position = Vector2(250, 146)

@@ -1,11 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://c5tcfpqjtx80g"]
 
-[ext_resource type="PackedScene" uid="uid://d0reyuh7j0jwn" path="res://src/enemy/enemy.tscn" id="1_ss6m5"]
+[ext_resource type="PackedScene" uid="uid://bpyqlqvut3p42" path="res://src/map/i_tile_map.tscn" id="1_pp4r1"]
 [ext_resource type="PackedScene" uid="uid://xwhnuu6lot" path="res://src/player/player_ui.tscn" id="2_twehq"]
 
 [node name="Main" type="Node2D"]
 
-[node name="Enemy" parent="." instance=ExtResource("1_ss6m5")]
-position = Vector2(530, 260)
+[node name="ITileMap" parent="." instance=ExtResource("1_pp4r1")]
 
 [node name="PlayerUi" parent="." instance=ExtResource("2_twehq")]
