@@ -17,16 +17,15 @@ region = Rect2(51, 6, 42, 5)
 script = ExtResource("1_l06ag")
 
 [node name="Body" type="Sprite2D" parent="."]
-position = Vector2(32, 32)
 texture = ExtResource("1_jqhkc")
+centered = false
 
 [node name="PlayerUiRoot" type="Control" parent="Body"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -32.0
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = 32.0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="HealthUi" parent="Body/PlayerUiRoot" instance=ExtResource("3_33u4l")]

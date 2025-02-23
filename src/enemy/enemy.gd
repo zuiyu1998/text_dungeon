@@ -2,19 +2,16 @@ extends Node2D
 class_name Enemy
 
 @onready var body: Sprite2D = $Body
-@onready var health_ui: HealthUi = $Body/PlayerUiRoot/HealthUi
 @onready var player_ui_root: Control = $Body/PlayerUiRoot
+@onready var health_ui: HealthUi = $Body/PlayerUiRoot/HealthUi
 
 var stats: Stats = Stats.new_stats()
 
-func on_battle():
+func on_interaction():
+	print("battle start")
 	var battle_system = BattleSystem.new_battle_system([GLOBAL.player.stats, stats])
 	battle_system.start_battle()
 	pass
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
-		on_battle()
 
 func _ready() -> void:
 	player_ui_root.size = body.texture.get_size()

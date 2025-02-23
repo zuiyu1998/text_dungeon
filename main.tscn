@@ -1,10 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5tcfpqjtx80g"]
+[gd_scene load_steps=5 format=3 uid="uid://c5tcfpqjtx80g"]
 
-[ext_resource type="PackedScene" uid="uid://bpyqlqvut3p42" path="res://src/map/i_tile_map.tscn" id="1_pp4r1"]
+[ext_resource type="Script" path="res://src/map/i_tile_map.gd" id="1_1piuh"]
+[ext_resource type="PackedScene" uid="uid://bsthn5pnwss5b" path="res://src/map/tile_slot.tscn" id="2_b4bvp"]
 [ext_resource type="PackedScene" uid="uid://xwhnuu6lot" path="res://src/player/player_ui.tscn" id="2_twehq"]
+[ext_resource type="PackedScene" uid="uid://d0reyuh7j0jwn" path="res://src/enemy/enemy.tscn" id="3_hak24"]
 
 [node name="Main" type="Node2D"]
 
-[node name="ITileMap" parent="." instance=ExtResource("1_pp4r1")]
+[node name="Level" type="Node2D" parent="."]
 
-[node name="PlayerUi" parent="." instance=ExtResource("2_twehq")]
+[node name="ITileMap" type="Node2D" parent="Level"]
+position = Vector2(-32, -32)
+script = ExtResource("1_1piuh")
+
+[node name="TileSlot" parent="Level/ITileMap" node_paths=PackedStringArray("tile_map") instance=ExtResource("2_b4bvp")]
+tile_map = NodePath("..")
+
+[node name="Enemy" parent="Level/ITileMap/TileSlot" instance=ExtResource("3_hak24")]
+
+[node name="TileSlot2" parent="Level/ITileMap" node_paths=PackedStringArray("tile_map") instance=ExtResource("2_b4bvp")]
+position = Vector2(64, 0)
+tile_map = NodePath("..")
+
+[node name="Enemy" parent="Level/ITileMap/TileSlot2" instance=ExtResource("3_hak24")]
+metadata/_edit_lock_ = true
+
+[node name="TileSlot3" parent="Level/ITileMap" node_paths=PackedStringArray("tile_map") instance=ExtResource("2_b4bvp")]
+position = Vector2(64, 64)
+tile_map = NodePath("..")
+
+[node name="Enemy" parent="Level/ITileMap/TileSlot3" instance=ExtResource("3_hak24")]
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="Level"]
+
+[node name="PlayerUi" parent="Level" instance=ExtResource("2_twehq")]

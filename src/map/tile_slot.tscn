@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsthn5pnwss5b"]
+
+[ext_resource type="Script" path="res://src/map/tile_slot.gd" id="1_puuo2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfqgu"]
+size = Vector2(64, 64)
+
+[node name="TileSlot" type="Area2D"]
+script = ExtResource("1_puuo2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_mfqgu")
