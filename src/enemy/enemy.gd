@@ -23,8 +23,13 @@ func on_health_update():
 	health_ui.update_health(progress)
 	pass
 
+func on_die():
+	print("on die")
+	pass
+
 func _on_bind():
 	stats.health_update.connect(on_health_update)
+	stats.die.connect(on_die)
 
 func _process(delta: float) -> void:
 	pass

@@ -4,7 +4,6 @@ extends CanvasLayer
 
 func on_health_update():
 	var progress = GLOBAL.player.stats.get_health_progress()
-	print(progress)
 	health.value = progress
 	pass
 

@@ -1,11 +1,19 @@
 class_name Stats
 
 signal health_update
+signal die
 
 var _base_props: Props
 
 var _props: Props 
 var _state: StatsState = StatsState.new()
+
+func destroy():
+	die.emit()
+
+# 获取状态
+func get_die() -> bool:
+	return _state.health <= 0
 
 # 获取伤害
 func get_damage() -> int:
@@ -25,7 +33,7 @@ static func new_stats():
 func get_health_progress() -> float:
 	var progress = _state.health * 1.0 / _state.max_health
 	return progress
-	
+
 func emit_health_update():
 	health_update.emit()
 	pass
@@ -50,4 +58,3 @@ func apply_effcts(effcts: Array[StatsEffect]):
 	for effct in effcts:
 		effct.update(context)
 	_merge_context(context)
-	

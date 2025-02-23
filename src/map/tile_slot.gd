@@ -19,7 +19,7 @@ func on_interaction():
 func get_tile_id() -> int:
 	return get_instance_id()
 
-func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
+func _input_event(_viewport: Viewport, _event: InputEvent, _shape_idx: int) -> void:
 	if not tile_map:
 		return
 	

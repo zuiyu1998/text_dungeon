@@ -10,10 +10,12 @@ static func new_battle_stats_effect(result: BattleResult, is_active = false) -> 
 	effct._result = result
 	return effct
 
+func set_active(active: bool):
+	_is_active = active
+
 func update(context: StatsContext):
 	# 对伤害进行计算
 
 	if not _is_active:
 		if _result.hit_result.hit:
 			context.state.update_health(-_result.damage_result.damage)
-
