@@ -19,6 +19,7 @@ const DEFAULT_PROPS = {
 	"first_attack": preload("res://src/prop/resource/first_attack/first_attack.tres")
 }
 
+
 static func get_default_props() -> Props:
 	var props = Props.new()
 
@@ -28,5 +29,4 @@ static func get_default_props() -> Props:
 		for effct in prop_res.effcts:
 			props.set_effct(effct)
 
-	
 	return props

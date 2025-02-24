@@ -2,33 +2,34 @@ class_name DiceResult
 
 enum DiceResultState {
 	# 大成功
-	GreatSuccess,
+	GREAT_SUCCESS,
 	# 大失败
-	GreatFail,
+	GREAT_FAIL,
 	# 成功
-	Success,
+	SUCCESS,
 	# 失败
-	Fail,
+	FAIL,
 	# 值
-	Normal
+	NORMAL
 }
 
-var state: DiceResultState = DiceResultState.Normal
+var state: DiceResultState = DiceResultState.NORMAL
 
 var number: int = 0
+
 
 func check_ac(base: int, ac: int) -> bool:
 	var res = false
 	match state:
-		DiceResultState.GreatSuccess:
+		DiceResultState.GREAT_SUCCESS:
 			res = true
-		DiceResultState.GreatFail:
+		DiceResultState.GREAT_FAIL:
 			res = false
-		DiceResultState.Success:
+		DiceResultState.SUCCESS:
 			res = true
-		DiceResultState.Fail:
+		DiceResultState.FAIL:
 			res = false
-		DiceResultState.Normal:
+		DiceResultState.NORMAL:
 			res = (number + base) >= ac
-	
+
 	return res

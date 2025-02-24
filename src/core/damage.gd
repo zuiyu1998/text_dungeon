@@ -2,7 +2,7 @@ class_name Damage
 
 enum DamageType {
 	# 穿刺
-	Puncture,
+	PUNCTURE = 0,
 	# 钝击
-	Blunt
+	BLUNT = 1
 }

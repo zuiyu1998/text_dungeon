@@ -12,7 +12,15 @@ var _max_limit: float = 0.0
 
 var _min_limit: float = 0.0
 
-static func new_prop(prop_name: String, value: float, max_value: float = 100, min_value: float = -100, max_limit: float = 1000, min_limit: float = -1000) -> Prop:
+
+static func new_prop(
+	prop_name: String,
+	value: float,
+	max_value: float = 100,
+	min_value: float = -100,
+	max_limit: float = 1000,
+	min_limit: float = -1000
+) -> Prop:
 	var prop = Prop.new()
 	prop._value = value
 	prop._max_value = max_value
@@ -22,9 +30,10 @@ static func new_prop(prop_name: String, value: float, max_value: float = 100, mi
 	prop._prop_name = prop_name
 	return prop
 
+
 func to_dic() -> Dictionary:
 	var v = {}
-	
+
 	v["prop_name"] = _prop_name
 	v["value"] = _value
 	v["max_value"] = _max_value
@@ -38,11 +47,14 @@ func to_dic() -> Dictionary:
 func update_value(v: float):
 	_value += v
 
+
 func get_name() -> String:
 	return _prop_name
 
+
 func set_value(v: float):
 	_value = v
+
 
 func get_value() -> int:
 	var max_tmp = minf(_max_limit, _max_value)

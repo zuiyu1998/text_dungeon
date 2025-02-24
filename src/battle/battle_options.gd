@@ -33,20 +33,20 @@ var thump_magnification: int = 150
 var thump_dice_options: Dice.DiceOption = Dice.DiceOption.new()
 
 # 抗性
-var resistance_map: Dictionary = {
-	Damage.DamageType.Puncture: 100
-}
+var resistance_map: Dictionary = {Damage.DamageType.Puncture: 100}
+
 
 func clone_resistance() -> Dictionary:
 	return resistance_map.duplicate(true)
 
+
 func get_option(option_name: String) -> int:
 	if self[option_name]:
 		return self[option_name]
-	else:
-		return 0
+	return 0
 
-static func from_stats(stats:Stats) -> BattleOptions:
+
+static func from_stats(stats: Stats) -> BattleOptions:
 	var options = BattleOptions.new()
 	options.damage = stats.get_damage()
 	return options

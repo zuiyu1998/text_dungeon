@@ -17,9 +17,8 @@ var thump_dice: Dice
 var thump_magnification: int = 150
 
 # 穿刺抗性
-var resistance_map: Dictionary = {
-	Damage.DamageType.Puncture: 100
-}
+var resistance_map: Dictionary = {Damage.DamageType.Puncture: 100}
+
 
 func get_damage_result() -> DamageResult:
 	var damage_result := DamageResult.new()
@@ -27,12 +26,14 @@ func get_damage_result() -> DamageResult:
 	var tmp_damage = damage
 
 	var dice_res = thump_dice.get_dice_result()
-	
+
 	damage_result.base_damage = damage
 
 	if dice_res.check_ac(thump, coordinate):
 		damage_result.is_thump = true
-		damage_result.thump_damage = floori((thump_magnification / 100.0) * damage_result.base_damage)
+		damage_result.thump_damage = floori(
+			(thump_magnification / 100.0) * damage_result.base_damage
+		)
 		tmp_damage = damage_result.thump_damage
 
 	var resistance = 100

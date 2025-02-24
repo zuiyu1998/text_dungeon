@@ -1,3 +1,3 @@
 @tool
-extends Resource
 class_name ITileMapData
+extends Resource
