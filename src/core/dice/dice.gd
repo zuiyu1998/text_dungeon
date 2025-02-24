@@ -11,15 +11,15 @@ func get_dice_result() -> DiceResult:
 	res.number = num
 
 	if num == _options.max_count:
-		res.state = DiceResult.DiceResultState.GreatSuccess
+		res.state = DiceResult.DiceResultState.GREAT_SUCCESS
 	elif num == _options.min_count:
-		res.state = DiceResult.DiceResultState.GreatFail
+		res.state = DiceResult.DiceResultState.GREAT_FAIL
 	elif (num + _options.max_offset) >= _options.max_count:
-		res.state = DiceResult.DiceResultState.Success
+		res.state = DiceResult.DiceResultState.SUCCESS
 	elif (num - _options.min_offset) <= _options.min_count:
-		res.state = DiceResult.DiceResultState.Fail
+		res.state = DiceResult.DiceResultState.FAIL
 	else:
-		res.state = DiceResult.DiceResultState.Normal
+		res.state = DiceResult.DiceResultState.NORMAL
 	return res
 
 

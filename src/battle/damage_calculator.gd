@@ -1,6 +1,6 @@
 class_name DamageCalculator
 
-var damage_type: Damage.DamageType = Damage.DamageType.Puncture
+var damage_type: Damage.DamageType = Damage.DamageType.PUNCTURE
 
 var damage: int = 0
 
@@ -17,7 +17,7 @@ var thump_dice: Dice
 var thump_magnification: int = 150
 
 # 穿刺抗性
-var resistance_map: Dictionary = {Damage.DamageType.Puncture: 100}
+var resistance_map: Dictionary = {Damage.DamageType.PUNCTURE: 100}
 
 
 func get_damage_result() -> DamageResult:

@@ -19,7 +19,7 @@ var physical_hit_dice_options: Dice.DiceOption = Dice.DiceOption.new()
 var damage: int = 0
 
 # 伤害类型
-var damage_type: Damage.DamageType = Damage.DamageType.Puncture
+var damage_type: Damage.DamageType = Damage.DamageType.PUNCTURE
 
 # 协调
 var coordinate: int = 10
@@ -33,7 +33,7 @@ var thump_magnification: int = 150
 var thump_dice_options: Dice.DiceOption = Dice.DiceOption.new()
 
 # 抗性
-var resistance_map: Dictionary = {Damage.DamageType.Puncture: 100}
+var resistance_map: Dictionary = {Damage.DamageType.PUNCTURE: 100}
 
 
 func clone_resistance() -> Dictionary:

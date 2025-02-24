@@ -4,10 +4,14 @@ extends Node
 signal health_update
 signal die
 
-var _base_props: Props
+var _base_props: Props = PropConst.get_default_props()
 
-var _props: Props
+var _props: Props = PropConst.get_default_props()
 var _state: StatsState = StatsState.new()
+
+
+func _ready() -> void:
+	_on_bind()
 
 
 func destroy():
@@ -22,18 +26,6 @@ func get_die() -> bool:
 # 获取伤害
 func get_damage() -> int:
 	return 2
-
-
-static func new_stats():
-	var new_v = Stats.new()
-	var props = PropConst.get_default_props()
-	new_v._base_props = props
-	new_v._props = PropConst.get_default_props()
-	new_v._props.from_dic(props.to_dic())
-
-	new_v._on_bind()
-
-	return new_v
 
 
 func get_health_progress() -> float:
