@@ -7,9 +7,17 @@ extends Node2D
 @onready var stats: Stats = $Stats
 
 
+func get_character() -> Character:
+	return EnemyCharacter.new_character(self)
+
+
 func on_interaction():
 	print("battle start")
-	var battle_system = BattleSystem.new_battle_system([GLOBAL.player.stats, stats])
+
+	var player_battle_item = StatsBattleItem.new_stats_battle_item(GLOBAL.player.get_character())
+	var enemy_battle_item = StatsBattleItem.new_stats_battle_item(get_character())
+
+	var battle_system = BattleSystem.new_battle_system([player_battle_item, enemy_battle_item])
 	battle_system.start_battle()
 
 
@@ -31,3 +39,16 @@ func on_die():
 func _on_bind():
 	stats.health_update.connect(on_health_update)
 	stats.die.connect(on_die)
+
+
+class EnemyCharacter:
+	extends Character
+	var _enemy: Enemy
+
+	static func new_character(enemy: Enemy) -> Character:
+		var character = EnemyCharacter.new()
+		character._enemy = enemy
+		return character
+
+	func get_stats() -> Stats:
+		return _enemy.stats

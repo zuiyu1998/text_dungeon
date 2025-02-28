@@ -9,7 +9,7 @@ func get_battle_calculator_result(
 	active: BattleItem, unactive: BattleItem, rand: RandomNumberGenerator
 ) -> BattleResult:
 	var battle_calculator = BattleCalculator.new_battle_calculator_from_rand(
-		active.options, unactive.options, rand
+		active.get_battle_option(), unactive.get_battle_option(), rand
 	)
 	return battle_calculator.get_result()
 

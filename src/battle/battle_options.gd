@@ -44,9 +44,3 @@ func get_option(option_name: String) -> int:
 	if self[option_name]:
 		return self[option_name]
 	return 0
-
-
-static func from_stats(stats: Stats) -> BattleOptions:
-	var options = BattleOptions.new()
-	options.damage = stats.get_damage()
-	return options
