@@ -15,11 +15,8 @@ var physical_hit: int = 0
 # 物理命中骰子
 var physical_hit_dice_options: Dice.DiceOption = Dice.DiceOption.new()
 
-# 伤害数值
-var damage: int = 0
-
-# 伤害类型
-var damage_type: Damage.DamageType = Damage.DamageType.PUNCTURE
+# 伤害来源
+var damage_source: DamageSource = DamageSource.new()
 
 # 协调
 var coordinate: int = 10
@@ -44,3 +41,16 @@ func get_option(option_name: String) -> int:
 	if self[option_name]:
 		return self[option_name]
 	return 0
+
+
+# 伤害来源
+class DamageSource:
+	extends RefCounted
+	# 基础伤害数值
+	var damage: int = 0
+
+	# 伤害类型
+	var damage_type: Damage.DamageType = Damage.DamageType.PUNCTURE
+
+	# 随机伤害
+	var damage_dices: Array[Dice] = []

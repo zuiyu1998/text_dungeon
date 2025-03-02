@@ -3,11 +3,14 @@ extends GutTest
 
 func test_battle_calculator():
 	var first_options = BattleOptions.new()
-	first_options.damage = 10
+	first_options.damage_source.damage = 5
+	var number = FixedNumberBuilder.new_number_builder(5)
+	var dice = Dice.new_dice(number)
+	first_options.damage_source.damage_dices.assign([dice])
 
 	var second_options = BattleOptions.new()
 
-	second_options.resistance_map[first_options.damage_type] = 150
+	second_options.resistance_map[first_options.damage_source.damage_type] = 150
 
 	var physical_hit_number_builder = FixedNumberBuilder.new_number_builder(11)
 	var thump_number_builder = FixedNumberBuilder.new_number_builder(11)
@@ -77,19 +80,20 @@ class TestBattleItem:
 	extends BattleItem
 	var options = BattleOptions.new()
 	var count = 0
+	var is_active = false
 
-	func get_battle_option() -> BattleOptions:
+	func get_battle_option(_rand: RandomNumberGenerator) -> BattleOptions:
 		return options
 
-	func get_first_attack_judgment() -> FirstAttackJudgment:
-		return FirstAttackJudgment.from_battle_options(self.get_battle_option())
+	func get_first_attack_judgment(rand: RandomNumberGenerator) -> FirstAttackJudgment:
+		return FirstAttackJudgment.from_battle_options(self.get_battle_option(rand))
 
 	func destroy():
 		print("TestBattleItem destroy.")
 
 	func apply_battle_result(_res: BattleResult):
 		count += 1
-		print("TestBattleItem apply_battle_result.")
+		print("TestBattleItem apply_battle_result")
 
 	func get_die() -> bool:
 		print("TestBattleItem get_die true.")
@@ -99,6 +103,7 @@ class TestBattleItem:
 func test_battle_system():
 	var first_item = TestBattleItem.new()
 	first_item.options.first_attack = 10
+	first_item.is_active = true
 
 	var second_item = TestBattleItem.new()
 	second_item.options.first_attack = 2

@@ -1,4 +1,5 @@
 class_name BattleCalculator
+extends RefCounted
 
 var hit_calculator: HitCalculator = HitCalculator.new()
 var damage_calculator: DamageCalculator = DamageCalculator.new()
@@ -14,12 +15,17 @@ static func get_armor(options: BattleOptions) -> int:
 
 
 static func get_damage(options: BattleOptions) -> int:
-	var damage = BattleOptionBuilder.new_battle_option_builder(options, "damage")
+	var damage = 0
+	var base_damge = options.damage_source.damage
 
-	var manager = BattleNumberManager.new()
-	manager.data.assign([damage])
+	damage += base_damge
 
-	return manager.get_battle_number()
+	for damage_dice in options.damage_source.damage_dices:
+		# todo 根据成功状态是否添加更多的数值
+		var dice_result = damage_dice.get_dice_result()
+		damage += dice_result.number
+
+	return damage
 
 
 static func get_coordinate(options: BattleOptions) -> int:
@@ -104,7 +110,7 @@ static func new_battle_calculator(
 	calculator.hit_calculator.armor_hit = hit
 
 	calculator.damage_calculator.damage = BattleCalculator.get_damage(active)
-	calculator.damage_calculator.damage_type = active.damage_type
+	calculator.damage_calculator.damage_type = active.damage_source.damage_type
 	calculator.damage_calculator.coordinate = BattleCalculator.get_coordinate(unactive)
 	calculator.damage_calculator.thump = BattleCalculator.get_thump(active)
 	calculator.damage_calculator.thump_dice = thump_dice

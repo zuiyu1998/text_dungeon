@@ -13,7 +13,6 @@ func get_character() -> Character:
 
 func on_interaction():
 	print("battle start")
-
 	var player_battle_item = StatsBattleItem.new_stats_battle_item(GLOBAL.player.get_character())
 	var enemy_battle_item = StatsBattleItem.new_stats_battle_item(get_character())
 

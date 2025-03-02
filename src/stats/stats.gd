@@ -25,7 +25,7 @@ func get_die() -> bool:
 
 # 获取伤害
 func get_damage() -> int:
-	return 2
+	return _state.get_battle_source_state().damage
 
 
 func get_health_progress() -> float:

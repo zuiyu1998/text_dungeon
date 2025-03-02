@@ -9,14 +9,14 @@ static func new_stats_battle_item(character: Character) -> BattleItem:
 	return stats_battle_item
 
 
-func get_battle_option() -> BattleOptions:
+func get_battle_option(_rand: RandomNumberGenerator) -> BattleOptions:
 	var options = BattleOptions.new()
-	options.damage = _character.get_stats().get_damage()
+	options.damage_source.damage = _character.get_stats().get_damage()
 	return options
 
 
-func get_first_attack_judgment() -> FirstAttackJudgment:
-	return FirstAttackJudgment.from_battle_options(self.get_battle_option())
+func get_first_attack_judgment(rand: RandomNumberGenerator) -> FirstAttackJudgment:
+	return FirstAttackJudgment.from_battle_options(self.get_battle_option(rand))
 
 
 func destroy():

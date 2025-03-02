@@ -3,13 +3,13 @@ class_name BattleItem
 extends RefCounted
 
 
-func get_battle_option() -> BattleOptions:
+func get_battle_option(_rand: RandomNumberGenerator) -> BattleOptions:
 	printerr("[BattleItem] get_battle_option not initialization")
 	return
 
 
-func get_first_attack_judgment() -> FirstAttackJudgment:
-	return FirstAttackJudgment.from_battle_options(self.get_battle_option())
+func get_first_attack_judgment(rand: RandomNumberGenerator) -> FirstAttackJudgment:
+	return FirstAttackJudgment.from_battle_options(self.get_battle_option(rand))
 
 
 func destroy():
