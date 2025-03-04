@@ -1,4 +1,4 @@
-class_name BattleStatsEffect extends StatsEffect
+class_name BattleStatsEffect extends EffectBuilder
 
 var _result: BattleResult
 
@@ -9,8 +9,11 @@ static func new_battle_stats_effect(result: BattleResult) -> BattleStatsEffect:
 	return effct
 
 
-func update(context: StatsContext):
-	# 对伤害进行计算
+func build() -> EffectContext:
+	var context = EffectContext.new_effct()
 
 	if not _result.is_active and _result.hit_result.hit:
-		context.state.update_health(-_result.damage_result.damage)
+		context.damage = -_result.damage_result.damage
+		context.damage_type = _result.damage_result.damage_type
+
+	return context

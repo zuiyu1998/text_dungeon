@@ -28,4 +28,4 @@ func update_health(v: int):
 
 class BattleSourceState:
 	extends RefCounted
-	var damage: int = 0
+	var damage: int = 2

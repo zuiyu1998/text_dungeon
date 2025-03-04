@@ -10,6 +10,10 @@ var _props: Props = PropConst.get_default_props()
 var _state: StatsState = StatsState.new()
 
 
+func get_effct_exector() -> EffectExector:
+	return StatsEffectExector.new_effct_exector(self)
+
+
 func _ready() -> void:
 	_on_bind()
 
@@ -39,24 +43,3 @@ func emit_health_update():
 
 func _on_bind():
 	_state.health_update.connect(emit_health_update)
-
-
-func _get_context() -> StatsContext:
-	var context := StatsContext.new()
-	var props := Props.new()
-	props.from_dic(_base_props.to_dic())
-
-	context.props = props
-	context.state = _state
-	return context
-
-
-func _merge_context(context: StatsContext):
-	self._props = context.props
-
-
-func apply_effcts(effcts: Array[StatsEffect]):
-	var context = _get_context()
-	for effct in effcts:
-		effct.update(context)
-	_merge_context(context)
