@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PropEffect" load_steps=2 format=3 uid="uid://xn7yvtqi7uc1"]
 
-[ext_resource type="Script" path="res://src/prop/prop_effct.gd" id="1_5dyi6"]
+[ext_resource type="Script" uid="uid://53jjrrpa6qxb" path="res://src/prop/prop_effct.gd" id="1_5dyi6"]
 
 [resource]
 script = ExtResource("1_5dyi6")

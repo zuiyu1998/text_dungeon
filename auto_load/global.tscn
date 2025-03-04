@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b1nk8uls0d081"]
 
-[ext_resource type="Script" path="res://auto_load/global.gd" id="1_dtov7"]
+[ext_resource type="Script" uid="uid://ca2jl712b3l25" path="res://auto_load/global.gd" id="1_dtov7"]
 [ext_resource type="PackedScene" uid="uid://b88ir88h7knoi" path="res://src/player/player.tscn" id="2_0l8n8"]
 
 [node name="Global" type="Node"]
