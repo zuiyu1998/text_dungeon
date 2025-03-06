@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cc3sbhjjfmyxk"]
+[gd_scene load_steps=3 format=3 uid="uid://cc3sbhjjfmyxk"]
 
 [ext_resource type="Script" uid="uid://rapi3nq3qn5l" path="res://src/stats/stats.gd" id="1_omk77"]
+[ext_resource type="Script" uid="uid://bjockmqtm3yax" path="res://src/weapon/weapon.gd" id="2_ehn2s"]
 
 [node name="Stats" type="Node"]
 script = ExtResource("1_omk77")
+
+[node name="Weapon" type="Node" parent="."]
+script = ExtResource("2_ehn2s")
+metadata/_custom_type_script = "uid://bjockmqtm3yax"

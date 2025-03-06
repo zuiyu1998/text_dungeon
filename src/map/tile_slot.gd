@@ -1,4 +1,4 @@
-class_name TileSlot
+class_name ITileSlot
 extends Area2D
 
 @export var tile_map: ITileMap

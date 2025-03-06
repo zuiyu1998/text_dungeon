@@ -1,8 +1,17 @@
 class_name Props
 
-var _data: Dictionary = {}
+var physic_battle_source: BattleSource = BattleSource.new()
+var magic_battle_source: BattleSource = BattleSource.new()
+var damage_type: Damage.DamageType = Damage.DamageType.BLUNT
 
+var _data: Dictionary = {}
 var _effcts: Dictionary = {}
+
+
+func get_battle_source_state() -> BattleSource:
+	if Damage.is_physic(damage_type):
+		return physic_battle_source
+	return magic_battle_source
 
 
 func update_prop(prop_name: String, update: int):
@@ -42,3 +51,8 @@ func to_dic() -> Dictionary:
 func from_dic(_dic: Dictionary) -> Props:
 	var props = Props.new()
 	return props
+
+
+class BattleSource:
+	extends RefCounted
+	var damage: int = 0

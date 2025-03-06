@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="WeaponResource" load_steps=2 format=3 uid="uid://loo5woqqss4y"]
+
+[ext_resource type="Script" uid="uid://cg31xu0gfr5xq" path="res://src/weapon/weapon_resource.gd" id="1_3mb5a"]
+
+[resource]
+script = ExtResource("1_3mb5a")
+damage_dice_options = Array[Dictionary]([])
+damage = 4
+damage_type = 1
+weapon_id = 0
+weapon_name = "Fist"
+weapon_level = 0
+metadata/_custom_type_script = "uid://cg31xu0gfr5xq"

@@ -25,7 +25,7 @@ func destroy():
 
 func apply_battle_result(res: BattleResult):
 	var effect = BattleStatsEffect.new_battle_stats_effect(res)
-	_character.get_stats().get_effct_exector().apply_effcts([effect])
+	_character.get_stats().flush([effect])
 
 
 func get_die() -> bool:

@@ -5,9 +5,23 @@ signal health_update
 signal die
 
 var _base_props: Props = PropConst.get_default_props()
-
 var _props: Props = PropConst.get_default_props()
 var _state: StatsState = StatsState.new()
+
+@onready var weapon: Weapon = $Weapon
+
+
+func _get_effcts() -> Array[EffectBuilder]:
+	var effects: Array[EffectBuilder] = []
+	effects.append_array(weapon.get_effcts())
+	return effects
+
+
+func flush(extra_effects: Array[EffectBuilder] = []):
+	var effects = _get_effcts()
+	effects.append_array(extra_effects)
+	var exector = get_effct_exector()
+	exector.apply_effcts(effects)
 
 
 func get_effct_exector() -> EffectExector:
@@ -16,6 +30,10 @@ func get_effct_exector() -> EffectExector:
 
 func _ready() -> void:
 	_on_bind()
+
+	weapon = WeaponConsts.get_default_weapon()
+
+	flush()
 
 
 func destroy():
@@ -29,7 +47,7 @@ func get_die() -> bool:
 
 # 获取伤害
 func get_damage() -> int:
-	return _state.get_battle_source_state().damage
+	return _props.get_battle_source_state().damage
 
 
 func get_health_progress() -> float:
