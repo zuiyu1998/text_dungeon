@@ -1,3 +1,4 @@
+@tool
 class_name ITileSlot
 extends Area2D
 
@@ -9,6 +10,13 @@ var tile_interface: Node2D
 func _ready() -> void:
 	# refactor 如何精准的获取tile_interface
 	tile_interface = get_child(1)
+
+
+func on_show_ui(v: bool):
+	if not tile_interface:
+		return
+	if tile_interface.has_method("on_show_ui"):
+		tile_interface.on_show_ui(v)
 
 
 func on_interaction():

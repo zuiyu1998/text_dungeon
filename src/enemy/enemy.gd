@@ -5,10 +5,21 @@ extends Node2D
 @onready var player_ui_root: Control = $Body/PlayerUiRoot
 @onready var health_ui: HealthUi = $Body/PlayerUiRoot/HealthUi
 @onready var stats: Stats = $Stats
+@onready var canvas_layer: CanvasLayer = $CanvasLayer
+@onready var stats_ui: StatsUi = $CanvasLayer/ColorRect/StatsUi
 
 
 func get_character() -> Character:
 	return EnemyCharacter.new_character(self)
+
+
+func _input(event: InputEvent) -> void:
+	if canvas_layer.visible and event.is_action_pressed("check"):
+		canvas_layer.visible = false
+
+
+func on_show_ui(v: bool):
+	canvas_layer.visible = v
 
 
 func on_interaction():
@@ -22,6 +33,8 @@ func on_interaction():
 
 func _ready() -> void:
 	player_ui_root.size = body.texture.get_size()
+	var info = stats.get_state_info()
+	stats_ui.update_ui(info)
 	_on_bind()
 	on_health_update()
 

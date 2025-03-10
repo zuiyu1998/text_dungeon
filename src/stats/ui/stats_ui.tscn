@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://cimqi3md1x66b"]
+
+[ext_resource type="Script" uid="uid://dst1itjjwrgdf" path="res://src/stats/ui/stats_ui.gd" id="1_qhhds"]
+[ext_resource type="PackedScene" uid="uid://crpd7l1kqg7il" path="res://src/common/ui/prop_ui.tscn" id="2_pon0w"]
+[ext_resource type="PackedScene" uid="uid://b6urjobtj67eo" path="res://src/weapon/ui/weapon_ui.tscn" id="2_wf6vv"]
+
+[node name="StatsUi" type="PanelContainer"]
+custom_minimum_size = Vector2(1600, 800)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -352.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qhhds")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "武器"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="WeaponContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="WeaponUi" parent="MarginContainer/VBoxContainer/VBoxContainer/WeaponContainer" instance=ExtResource("2_wf6vv")]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "属性"
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Strength" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_pon0w")]
+layout_mode = 2
+
+[node name="Dexterity" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_pon0w")]
+layout_mode = 2
+
+[node name="Constitution" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_pon0w")]
+layout_mode = 2
+
+[node name="Charisma" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_pon0w")]
+layout_mode = 2
+
+[node name="Intelligence" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_pon0w")]
+layout_mode = 2
+
+[node name="Wisdom" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_pon0w")]
+layout_mode = 2
+
+[node name="FirstAttack" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_pon0w")]
+layout_mode = 2
+
+[node name="PhysicDamage" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_pon0w")]
+layout_mode = 2
+
+[node name="MagicDamage" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("2_pon0w")]
+layout_mode = 2

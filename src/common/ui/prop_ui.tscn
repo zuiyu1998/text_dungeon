@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://crpd7l1kqg7il"]
+
+[ext_resource type="Script" uid="uid://8oltcaa7ooee" path="res://src/common/ui/prop_ui.gd" id="1_67jbk"]
+
+[node name="PropUi" type="HBoxContainer"]
+script = ExtResource("1_67jbk")
+
+[node name="PropLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "属性标签"
+
+[node name="PropValue" type="Label" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "属性值"

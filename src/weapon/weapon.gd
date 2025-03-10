@@ -23,6 +23,13 @@ var weapon_level: WeaponTypes.WeaponLevel = WeaponTypes.WeaponLevel.WHITE
 var entrys: Array[WeaponEntry] = []
 
 
+func get_info() -> WeaponInfo:
+	var info = WeaponInfo.new()
+	info.weapon_id = weapon_id
+	info.weapon_name = weapon_name
+	return info
+
+
 func get_weapon_effct() -> WeaponEffctBuilder:
 	var builder = WeaponEffctBuilder.new()
 	builder.damage = damage

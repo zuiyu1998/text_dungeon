@@ -4,7 +4,7 @@ var physic_battle_source: BattleSource = BattleSource.new()
 var magic_battle_source: BattleSource = BattleSource.new()
 var damage_type: Damage.DamageType = Damage.DamageType.BLUNT
 
-var _data: Dictionary = {}
+var data: Dictionary = {}
 var _effcts: Dictionary = {}
 
 
@@ -24,7 +24,7 @@ func update_prop(prop_name: String, update: int):
 
 
 func get_prop(prop_name: String) -> Prop:
-	return _data[prop_name]
+	return data[prop_name]
 
 
 func set_effct(effct: PropEffect):
@@ -36,13 +36,13 @@ func set_effct(effct: PropEffect):
 
 
 func set_prop(prop: Prop):
-	_data[prop.get_name()] = prop
+	data[prop.get_name()] = prop
 
 
 func to_dic() -> Dictionary:
 	var v = {}
 
-	for prop: Prop in _data.values():
+	for prop: Prop in data.values():
 		v[prop.get_name()] = prop.to_dic()
 
 	return v

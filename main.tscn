@@ -35,3 +35,4 @@ metadata/_edit_lock_ = true
 [node name="Camera2D" type="Camera2D" parent="Level"]
 
 [node name="PlayerUi" parent="Level" instance=ExtResource("2_twehq")]
+layer = 2

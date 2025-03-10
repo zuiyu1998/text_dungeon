@@ -1,9 +1,36 @@
-[gd_scene load_steps=3 format=3 uid="uid://b88ir88h7knoi"]
+[gd_scene load_steps=4 format=3 uid="uid://b88ir88h7knoi"]
 
 [ext_resource type="PackedScene" uid="uid://cc3sbhjjfmyxk" path="res://src/stats/stats.tscn" id="1_g4r22"]
 [ext_resource type="Script" uid="uid://b7jp5m15t6sil" path="res://src/player/player.gd" id="1_nfdmx"]
+[ext_resource type="PackedScene" uid="uid://cimqi3md1x66b" path="res://src/stats/ui/stats_ui.tscn" id="3_mf2ua"]
 
 [node name="Player" type="Node"]
 script = ExtResource("1_nfdmx")
 
 [node name="Stats" parent="." instance=ExtResource("1_g4r22")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 98
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+metadata/_edit_use_anchors_ = true
+
+[node name="StatsUi" parent="CanvasLayer/ColorRect" node_paths=PackedStringArray("stats") instance=ExtResource("3_mf2ua")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -300.0
+offset_right = 400.0
+offset_bottom = 300.0
+stats = NodePath("../../../Stats")
