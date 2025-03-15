@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://i4361blvi4s0"]
+
+[ext_resource type="Script" uid="uid://ca14ccsiju2vm" path="res://src/weapon/ui/weapon_popup_panel.gd" id="1_lf483"]
+
+[node name="WeaponPopupPanel" type="PopupPanel"]
+auto_translate_mode = 1
+size = Vector2i(400, 600)
+visible = true
+script = ExtResource("1_lf483")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 396.0
+offset_bottom = 596.0
+
+[node name="WeaponName" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "武器名称"

@@ -40,7 +40,12 @@ func get_weapon_effct() -> WeaponEffctBuilder:
 
 func get_effcts() -> Array[EffectBuilder]:
 	var weapon_effect = get_weapon_effct()
-	return [weapon_effect]
+	var entry_effcts = entrys.map(func(entry): return entry.get_effct_builder())
+
+	var temp: Array[EffectBuilder] = [weapon_effect]
+	temp.append_array(entry_effcts)
+
+	return temp
 
 
 class WeaponEffctBuilder:

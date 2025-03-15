@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnyj550yub1n1"]
+
+[ext_resource type="Script" uid="uid://d0arwpt51is11" path="res://auto_load/tooltip.gd" id="1_771fd"]
+[ext_resource type="PackedScene" uid="uid://i4361blvi4s0" path="res://src/weapon/ui/weapon_popup_panel.tscn" id="2_0u3ah"]
+
+[node name="Tooltip" type="Node"]
+script = ExtResource("1_771fd")
+
+[node name="WeaponPopupPanel" parent="." instance=ExtResource("2_0u3ah")]

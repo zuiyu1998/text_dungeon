@@ -18,6 +18,12 @@ config/icon="res://icon.svg"
 [autoload]
 
 GLOBAL="*res://auto_load/global.tscn"
+TOOLTIP="*res://auto_load/tooltip.tscn"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 
 [editor_plugins]
 
